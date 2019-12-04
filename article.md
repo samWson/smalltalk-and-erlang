@@ -47,19 +47,19 @@ summarize with a definition of what objects are. This will be used to compare wi
 
 An Object Oriented system is one where the system behavior is modeled as a network of communicating objects. The key characteristics of an Object Oriented system are:
 
-##### Isolation
+##### Encapsulation
 
-Objects do not share state. To an outsider they are a black box. One object will not know another objects internal behavior or state.
+Objects do not share state. To an outsider they are a black box. One object will not know another objects internal behavior or state. Information can enter and exit an object only through a well defined interface.
 
 ##### Message Passing
 
-All behavior happens when an object sends a message to another object. A sender can tell another object to do a specific behavior with a known interface but the sender has no control over what happens once the message is received. The receiver of the message decides what to do on receipt of a message.
+All behavior happens when an object sends a message to another object. A sender can tell another object to do a specific behavior through its known interface but the sender has no control over what happens once the message is received. The receiver of the message decides what to do on receipt of a message.
 
-## How does Elixir fit in?
+## How does Erlang fit in?
 
-At the language level Elixir is not Object Oriented but functional instead. However the language and the Erlang virtual machine on which it runs has the model of communicating processes. The difference here is that while Smalltalk is objects all the way down to the simplest parts of the language Elixir is communicating processes only at the higher level of abstraction. At the module level the basic parts of the language are not processes.
+At the language level Erlang is not Object Oriented but functional instead. However the language and the virtual machine on which it runs has the model of communicating processes. The difference here is that while Smalltalk is objects all the way down to the simplest parts of the language, Erlang is communicating processes only at the higher level of abstraction. At the module level the basic parts of the language are not processes.
 
-I love exploring history. There is a lot to learn in programming history. Eventually I came across Erlang. Erlang is built along the Actor model. Actors are implemented as processes.
+Erlang is built along the Actor model. Actors are implemented as processes.
 
 ### Erlang
 
@@ -82,14 +82,14 @@ _Concurrency Oriented Programming also provides the two major advantages commonl
 
 _In the real world sequential activities are a rarity. As we walk down the street we would be very surprised to find only one thing happening, we expect to encounter many simultaneous events._[8]
 
-Joe Armstrong defines programming languages that have good support for concurrency at the language level as Concurrency Oriented Languages or COPL for short. In the case of Erlang this is provided by independently executing concurrent processes.
+I remember learning the concept of modeling an Object Oriented system by using objects to represent the real life entities in a system e.g. cars, trucks, planes etc. The last quote here shows an important caveat on that approach. Objects in most Object Oriented languages are first used in a sequential fashion. Concurrency comes later only as it is needed and using dedicated libraries for the task. But as pointed out the real world is not sequential. Joe Armstrong provides us with an alternative here. A programming language that can be used to model the real world with concurrency first. Joe Armstrong defines programming languages that have good support for concurrency at the language level as Concurrency Oriented Languages or COPL for short. In the case of Erlang this is provided by independently executing concurrent processes.
 
 ### Characteristics of a COPL
 
 Joe Armstrong states that COPLs are characterized by the following six properties:[9]
 1. COPLs must support processes. A process can be thought of as a self-contained virtual machine.
 2. Several processes operating on the same machine must be strongly isolated. A fault in one process should not adversely affect another process, unless such interaction is explicitly programmed.
-3. Each process must be identified by a unique unforgeable identifier.We will call this the Pid of the process.
+3. Each process must be identified by a unique unforgeable identifier. We will call this the Pid of the process.
 4. There should be no shared state between processes. Processes interact by sending messages. If you know the Pid of a process then you can send a message to the process.
 5. Message passing is assumed to be unreliable with no guarantee of delivery.
 6. It should be possible for one process to detect failure in another process. We should also know the reason for failure.
@@ -98,17 +98,19 @@ Joe Armstrong states that COPLs are characterized by the following six propertie
 
 _Processes communicate by sending and receiving messages... Message sending is asynchronous and safe, the message is guaranteed to eventually reach the recipient, provided that the recipient exists._[5]
 
+This quote is in opposition with the 5th characteristic of a COPL, but key features are still there: processes are isolated not only in state an behavior but also in execution. They are asynchronous and communicate with messages.
+
 #### Summarizing Concurrency Oriented Programming
 
 A Concurrency Oriented system is all about how processes work. System behavior is modeled as a network of processes. The characteristics of such a system are:
 
-##### Isolation
+##### Encapsulation
 
-Processes are strongly isolated. There is no shared state.
+Processes are strongly isolated. There is no shared state. There is no common execution. A failure in one process will not cascade to other processes (although Erlang can provide this behavior if we want to).
 
 ##### Message Passing
 
-Processes can interact by sending messages to each other. If you know the PID of a process then you can send it a message. The sender has no control over how the receiver responds to the message.
+Processes can interact by sending messages to each other. If you know the PID of a process then you can send it a message. The sender has no control over how the receiver responds to the message. This can happen synchronously or asynchronously.
 
 It used to when I first started making things with Elixir I would turn to processes as an equivalent to objects. This equivalence is wrong for the most part. The difference is in the level of abstraction. Objects are the most fundamental element of Smalltalk programming but in Elixir modules it's functions and data. But when you start to introduce processes to model the behavior of your program then Elixir starts to resemble the message passing objects of an object oriented language.
 
@@ -118,11 +120,11 @@ We can see that objects and processes have key characteristics in common. Erlang
 
 Processes don't just isolate state they also isolate execution. When an object sends a message to another the thread of execution passes from the sender to the receiver while the behavior is carried out and then the thread of execution returns to the receiver. When a process sends a message to another process the senders thread of execution continues independently of the receiver. The sender may wait for a response from the receiver, in which case it is blocking, or it may continue asynchronously. Message passing between processes is assumed to be unreliable with no guarantee of delivery.
 
-Collectively what this means is that processes are object oriented system made safe for concurrency and fault tolerance.
+Collectively what this means is that processes are Object Oriented system made safe for concurrency. The Erlang programs and those of its descendants are Concurrent Object Oriented systems.
 
 ### Message Passing Objects and Processes
 
-Here is a pair of counters one a Ruby object the other an Elixir process. They both increase and return a number each time they are sent the `increment` message.
+The semantics of message passing are very similar in Object Oriented and Concurrency Oriented languages. The examples here are in Ruby and Elixir. Both are modern languages with a similar syntax. Ruby is Object Oriented in the tradition of Smalltalk while Elixir is Concurrency Oriented in the tradition of Erlang. The code examples show a pair of counters. One a Ruby object the other an Elixir process. They both increase and return a number each time they are sent the `increment` message.
 
 
 ```ruby
@@ -154,7 +156,7 @@ irb(main):005:0> counter.increment
 => 4
 ```
 
-This Elixir example is adapted from another example in the getting started guide.
+This Elixir example is adapted from another example in the Elixir getting started guide.
 ```elixir
 # counter.exs
 defmodule Counter do
@@ -194,15 +196,17 @@ iex(5)> flush()
 :ok
 ```
 
+In `iex` you may need to use `flush()` to show what's in the process message queue but you can see at the end that the count increased for each message send.
+
 The syntax is different but overall the semantics are the same: a message is sent to an entity. As long as the entity understands the message then some behavior is triggered. The sender will also pass a reference to `self` so the receiver knows who to return the response to. It an object oriented language this is implicit.
 
-### The Object Oriented Abstraction in Elixir
+### The Object Oriented Abstraction in Erlang
 
-The previous section is a simple low level example but we almost never need to create this behavior ourself in Elixir. The `Agent` module is a simple abstraction that allows state to be retrieved and updated.
+The previous section is a simple low level example but we almost never need to create this behavior ourself in Elixir or Erlang. The `Agent` module is a simple abstraction that allows state to be retrieved and updated.
 
 Agent is a part of OTP, a framework that Erlang is well known for and there are many more abstractions based on processes there too. GenServers a process that abstracts the server of a client-server relation. Tasks will typically execute one particular action throughout their lifetime.
 
-So an Elixir application using OTP is likely to have many independent processes communicating by sending messages to each other. Processes are being supervised, killed, restarted, and spawned all the time.
+So an Erlang application using OTP is likely to have many independent processes communicating by sending messages to each other. Processes are being supervised, killed, restarted, and spawned all the time.
 
 _comparison of objects and messages_
 
