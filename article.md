@@ -42,7 +42,7 @@ An object is encapsulated. Another object can send a message to request an opera
 
 An Object Oriented system is one where the system behavior is modeled as a network of communicating objects. The key characteristics of an Object Oriented system are enxapsulation and message passing.
 
-
+![Two objects, A sending a message to B.](https://raw.githubusercontent.com/samWson/smalltalk-and-erlang/master/images/message-sending-objects.png)
 
 In this example we can see two objects, A and B. A sends the message `foo` to B. A is the sender of the message and B is the receiver. On receiving the message B will see if it has any way of handling the message, a _method_. It finds the method of the same name in its dictionary and executes the code within. This results in the return of `bar` back to the sender A.  
 
