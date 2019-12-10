@@ -38,22 +38,21 @@ _A message is a request for an object to carry out one of its operations. A mess
 
 An object is encapsulated. Another object can send a message to request an operation but the sender has no control over how that operation is carried out. Only the receiver of a message can run one of its own methods. Other objects can't _call_ methods. We can understand then that objects are independent of each other, their operations and state isolated from each other. Behavior happens in response to messages.
 
-_insert Alan Kays definition of Object Oriented_
-_touch on the Pharo object model_
-
-summarize with a definition of what objects are. This will be used to compare with Elixir later_
-
 #### Summarizing Object Oriented
 
-An Object Oriented system is one where the system behavior is modeled as a network of communicating objects. The key characteristics of an Object Oriented system are:
+An Object Oriented system is one where the system behavior is modeled as a network of communicating objects. The key characteristics of an Object Oriented system are enxapsulation and message passing.
+
+
+
+In this example we can see two objects, A and B. A sends the message `foo` to B. A is the sender of the message and B is the receiver. On receiving the message B will see if it has any way of handling the message, a _method_. It finds the method of the same name in its dictionary and executes the code within. This results in the return of `bar` back to the sender A.  
 
 ##### Encapsulation
 
-Objects do not share state. To an outsider they are a black box. One object will not know another objects internal behavior or state. Information can enter and exit an object only through a well defined interface.
+Objects do not share state. To an outsider they are a black box. One object will not know another objects internal behavior or state. Information can enter and exit an object only through a well defined interface. 
 
 ##### Message Passing
 
-All behavior happens when an object sends a message to another object. A sender can tell another object to do a specific behavior through its known interface but the sender has no control over what happens once the message is received. The receiver of the message decides what to do on receipt of a message.
+All behavior happens when an object sends a message to another object. A sender can tell another object to do a specific behavior through its known interface but the sender has no control over what happens once the message is received. The receiver of the message decides what to do on receipt of a message. 
 
 ## How does Erlang fit in?
 
