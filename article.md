@@ -81,7 +81,21 @@ _Concurrency Oriented Programming also provides the two major advantages commonl
 
 _In the real world sequential activities are a rarity. As we walk down the street we would be very surprised to find only one thing happening, we expect to encounter many simultaneous events._[8]
 
-I remember learning the concept of modeling an Object Oriented system by using objects to represent the real life entities in a system e.g. cars, trucks, planes etc. The last quote here shows an important caveat on that approach. Objects in most Object Oriented languages are first used in a sequential fashion. Concurrency comes later only as it is needed and using dedicated libraries for the task. But as pointed out the real world is not sequential. Joe Armstrong provides us with an alternative here. A programming language that can be used to model the real world with concurrency first. Joe Armstrong defines programming languages that have good support for concurrency at the language level as Concurrency Oriented Languages or COPL for short. In the case of Erlang this is provided by independently executing concurrent processes.
+I remember learning the concept of modeling an Object Oriented system by using objects to represent the real life entities in a system e.g. cars, trucks, planes etc. The last quote here shows an important caveat on that approach. Objects in most Object Oriented languages are first used in a sequential fashion. Concurrency comes later only as it is needed and using dedicated libraries for the task.
+
+![A sequence diagram showing four objects sending messages to each in turn.](https://raw.githubusercontent.com/samWson/smalltalk-and-erlang/master/images/sequence-diagram.png)
+
+The above sequence diagram shows four objects sending messages to each other object in turn: object A sends a message to object B, which causes object B to send a message to object C and so on until the last object in sequence finishes its processing and sends a return. As each object receives a return it has what it needs to complete its processing and returns as well. This fits our model of message passing. Each object is a black box that can only trigger behavior in another by sending a message. They are isolated. But there an important area where the separate objects are not encapsulated at all.
+
+![A sequence diagram showing the thread of execution running through all objects as they send messages.](https://raw.githubusercontent.com/samWson/smalltalk-and-erlang/master/images/single-thread-sequence-diagram.png)
+
+We have the same four objects in the above diagram again but this time we can see the flow of execution as a red line through each object. As each object sends a message the execution halts in the sending object and starts in the receiving object. Encapsulation is broken. While the objects may not share state they are sharing execution. What would happen if there was an error in object C? Object D would never receive a message and objects A and B would never receive their expected returns as execution would never resume in them.
+
+As Joe Armstrong pointed out earlier the real world is not sequential but he provides us with an alternative here. A programming language that can be used to model the real world with concurrency first. Joe Armstrong defines programming languages that have good support for concurrency at the language level as Concurrency Oriented Languages or COPL for short. In the case of Erlang this is provided by independently executing concurrent processes.
+
+![A sequence diagram showing four objects as independent processes sending asynchronous and synchronous messages.](https://raw.githubusercontent.com/samWson/smalltalk-and-erlang/master/images/multi-process-sequence-diagram.png)
+
+We have the same four objects above but this time they are independent processes. Each one is isolated in not just state but also thread of execution. They operate on their own threads independently. They still communicate by sending messages. Messages can be synchronous, where the sender blocks until the receiver returns. Messages can be asynchronous, where the sender does not depend on a return and continues execution. If execution is stopped by error in one process the others will be able to continue as they have their own thread of execution.
 
 ### Characteristics of a COPL
 
@@ -97,7 +111,7 @@ Joe Armstrong states that COPLs are characterized by the following six propertie
 
 _Processes communicate by sending and receiving messages... Message sending is asynchronous and safe, the message is guaranteed to eventually reach the recipient, provided that the recipient exists._[5]
 
-This quote is in opposition with the 5th characteristic of a COPL, but key features are still there: processes are isolated not only in state an behavior but also in execution. They are asynchronous and communicate with messages.
+This quote is in opposition with the 5th characteristic of a COPL regarding the guarantees of message recipt, but key features are still there: processes are isolated not only in state an behavior but also in execution. They are asynchronous and communicate with messages.
 
 #### Summarizing Concurrency Oriented Programming
 
@@ -111,15 +125,15 @@ Processes are strongly isolated. There is no shared state. There is no common ex
 
 Processes can interact by sending messages to each other. If you know the PID of a process then you can send it a message. The sender has no control over how the receiver responds to the message. This can happen synchronously or asynchronously.
 
-It used to when I first started making things with Elixir I would turn to processes as an equivalent to objects. This equivalence is wrong for the most part. The difference is in the level of abstraction. Objects are the most fundamental element of Smalltalk programming but in Elixir modules it's functions and data. But when you start to introduce processes to model the behavior of your program then Elixir starts to resemble the message passing objects of an object oriented language.
-
 ### Where they Differ
 
 We can see that objects and processes have key characteristics in common. Erlang took the concept further though.
 
 Processes don't just isolate state they also isolate execution. When an object sends a message to another the thread of execution passes from the sender to the receiver while the behavior is carried out and then the thread of execution returns to the receiver. When a process sends a message to another process the senders thread of execution continues independently of the receiver. The sender may wait for a response from the receiver, in which case it is blocking, or it may continue asynchronously. Message passing between processes is assumed to be unreliable with no guarantee of delivery.
 
-Collectively what this means is that processes are Object Oriented system made safe for concurrency. The Erlang programs and those of its descendants are Concurrent Object Oriented systems.
+Collectively what this means is that processes are an Object Oriented system with features that make it safe for concurrency as a first design choice. The Erlang programs and those of its descendants are Concurrent Object Oriented systems.
+
+It used to when I first started making things with Elixir I would turn to processes as an equivalent to objects. This equivalence is wrong for the most part. The difference is in the level of abstraction. Objects are the most fundamental element of Smalltalk programming but in Elixir modules it's functions and data. But when you start to introduce processes to model the behavior of your program then Elixir starts to resemble the message passing objects of an object oriented language.
 
 ### Message Passing Objects and Processes
 
