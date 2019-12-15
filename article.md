@@ -217,33 +217,19 @@ The syntax is different but overall the semantics are the same: a message is sen
 
 The previous section is a simple low level example but we almost never need to create this behavior ourself in Elixir or Erlang. The `Agent` module is a simple abstraction that allows state to be retrieved and updated.
 
-Agent is a part of OTP, a framework that Erlang is well known for and there are many more abstractions based on processes there too. GenServers a process that abstracts the server of a client-server relation. Tasks will typically execute one particular action throughout their lifetime.
+Agent is a part of OTP, a framework that Erlang is well known for and there are many more abstractions based on processes there too. GenServers are a process that abstracts the server of a client-server relation. Tasks abstract a single purpose process that will typically execute one particular action throughout their lifetime.
 
 So an Erlang application using OTP is likely to have many independent processes communicating by sending messages to each other. Processes are being supervised, killed, restarted, and spawned all the time.
 
-_comparison of objects and messages_
-
-A key point of difference is that Processes take the idea of encapsulation even further than objects. In a single thread of execution when a message is sent to another object that thread of execution will move from the sender to the receiver, into any operation, and back to the sender again as a result is returned. Processes are on their own threads of execution. When a process sends a message to another that thread of execution is totally isolated. Not only do processes isolate state, they also isolate threads of execution.
-
-_OTP may be an example of object oriented design at the architecture level_
-
-_other possible examples of object oriented programing e.g. the Internet_
-
-_ending: does this even matter?_
-
-A key thing I found is that the definition of Object Oriented Programming is that was never intended to be static, as in it's just something to be learned (I don't refer to static vs. dynamic programming systems). Object Oriented as a concept went through several iterations of Smalltalk internally at Xerox and evolved with each iteration.
-
-With that in mind it's reasonable to take the idea of objects and messages an implement them in other novel ways, such as independent communicating processes.
+OTP is a high level frame work that models the behavior of a program as message communicating processes. Smalltalk is a pure Object Oriented language. The language is objects all the way down and so too higher level frameworks must also be modeled on the idea of message sending objects.
 
 ### Message Oriented Programming?
 
-This is my favorite quote from Alan Kay because it really says something important about Object Oriented as a model for system interaction:
+Of all the quotes I've sourced from Alan Kay this is my favorite because it really says something important about Object Oriented as a model for system interaction:
 
 _I'm sorry that I long ago coined the term "objects" for this topic because it gets many people to focus on the lesser idea. The big idea is "messaging"..._
 
-OTP is a high level frame work that models the behavior of a program as message communicating processes. Smalltalk is a pure Object Oriented language. The language is objects all the way down and so too higher level frameworks must also be modeled on the idea of message sending objects.
-
-The idea was that the program is all about the messages that need to be sent. It's not about which objects you need. So perhaps it should have been called **Message Oriented Programming**.
+The idea was that the system is all about the messages that need to be sent. It's not about which objects you need. So perhaps it should have been called **Message Oriented Programming**.
 
 ### Object Oriented is not just a Language Feature
 
@@ -255,17 +241,11 @@ _If you focus on just messaging... then much of the language-, UI-, and OS based
 
 _Smalltalk-80 never really was mutated into the next better versions of OOP. Given the current low state of programming in general, I think this is a real mistake._[4]
 
-Object Oriented is not just a language feature. Message sending objects can be a model for behavior in frameworks, networks, or other systems. Smalltalk-80 and Erlang are a few years apart and OTP would come along much later. I have seen no direct lineage or shared knowledge in the development between the two systems but the developers of both thought the idea of message sending was worth using to solve their particular set of problems. It that last quote was anything to go by then we may see new implementations of communicating objects or improvements on the idea in the future.
+A key thing I found is that the definition of Object Oriented Programming is that was never intended to be static, as in it's just something to be learned (note this is not static vs. dynamic typed programming systems). Object Oriented as a concept went through several iterations of Smalltalk internally at Xerox and evolved with each iteration. With that in mind it's reasonable to take the idea of objects and messages an implement them in other novel ways, such as independent communicating processes.
 
-When I was first learning to program I read a lot of heated opinions on how Object Oriented Programming was a mistake, a grand disaster, the cause of all our problems in software today. These same opinions would almost always evangelize that Functional Programming was the silver bullet, the one true way to write understandable error free software. This tribal war is still continuing among many others in programming.
+Message sending objects can be a model for behavior in frameworks, networks, or other systems. Smalltalk-80 and Erlang are a few years apart and OTP would come along much later. If that last quote was anything to go by then we may see new systems implemented as communicating objects or improvements on the idea in the future. We have likely not seen the end of object and message systems and they may have new names for what is already a familiar thing.
 
-Smalltalk-80, the first general release of the first Object Oriented Programing language was unveiled in 1980. In 1986 the Erlang programming language first appeared, only a few years between the two. In 1996 Ericsson would deliver the first prototype of the Open Telecom Protocol, a framework that would contain some Object Oriented abstractions built in a functional language.
-
-I still see a lot of salt thrown around during the eternal tribal war of Object Oriented vs. Functional paradigms. Smalltalk was an implementation of the idea a system of message communicating objects. Erlang and OTP is an implementation of the idea of message communicating processes. When the idea is messages the implementation does not matter only the interface. We have likely not seen the end of object and message systems and they may have new names for what is already a familiar thing.
-
-I found there are strong similarities to the ideas implemented in Smalltalk and Erlang but the different domain problems both languages were built for created very significant distinctions in how they behaved.
-
-And those are my opinions. Maybe you think I'm right, maybe you think I am mad. But my interest in Smalltalk and the history of Object Oriented Programming led me to discovering Erlang and processes and by extension Elixir. So I got to learn some great languages, frameworks, and patterns along the way. I'm always happy to share what I've found.
+This is a fun exploration through history but at the end of the day discussions about what is the one true programming paradigm don't really matter. Mental models for system behavior are just tools. There are commonalities and differences between Smalltalk and Erlang but they were both created to solve the problems of the day. As long as you can effectively solve your problem then the tools you use fade into the background.
 
 ## References
 * [1] Smalltalk-80, viii Preface, Smalltalk has few concepts.  
