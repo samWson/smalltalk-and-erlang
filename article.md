@@ -246,9 +246,9 @@ Message sending objects can be a model for behavior in frameworks, networks, or 
 This is a fun exploration through history but at the end of the day discussions about what is the one true programming paradigm don't really matter. Mental models for system behavior are just tools. There are commonalities and differences between Smalltalk and Erlang but they were both created to solve the problems of the day. As long as you can effectively solve your problem then the tools you use fade into the background.
 
 ## References
-* [1] Smalltalk-80, viii Preface, Smalltalk has few concepts.  
-* [2] Smalltalk-80, ix Preface, Smalltalk is a big system.
-* [3] Smalltalk-80, pg. 6 Part 1, Objects and Messages.
+* [1] [Smalltalk-80, viii Preface, Smalltalk has few concepts.](http://stephane.ducasse.free.fr/FreeBooks/BlueBook/Bluebook.pdf)  
+* [2] [Smalltalk-80, ix Preface, Smalltalk is a big system.](http://stephane.ducasse.free.fr/FreeBooks/BlueBook/Bluebook.pdf)
+* [3] [Smalltalk-80, pg. 6 Part 1, Objects and Messages.](http://stephane.ducasse.free.fr/FreeBooks/BlueBook/Bluebook.pdf)
 * [4] [prototypes vs classes was: Re: Sun's HotSpot](http://lists.squeakfoundation.org/pipermail/squeak-dev/1998-October/017019.html)
 * [5] [Erlang -- Processes](https://erlang.org/doc/reference_manual/processes.html#message-sending)
 * [6] [Making reliable distributed systems in the presence of software errors, pg 39, chapter 3.1, Erlang](http://erlang.org/download/armstrong_thesis_2003.pdf)
