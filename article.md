@@ -20,6 +20,8 @@ Smalltalk was created at Xerox PARC in the 1970s based on ideas gleaned from the
 
 In 1980 the first public release of Smalltalk was made, Smalltalk-80. The language, class library, and an implementation, were described in the Smalltalk-80 book, often called the **Blue Book**. I'm going to be referencing it a lot because it is Smalltalk and Object Oriented programming in the words of its creators.
 
+![Smalltalk-80 Blue Book cover.](https://raw.githubusercontent.com/samWson/smalltalk-and-erlang/master/images/smalltalk-80-blue-book.png)
+
 The creators state that the concepts that Smalltalk uses have unusually terminology. Smalltalks uniform concept across the system is described as _object-message orientation_[1]. The vocabulary of a Smalltalk system is _object, message, class, instance, and method_[1]. While common today these words and concepts were unheard of back in the 1970's having been seen only in the Simula programming language before.
 
 #### Communicating Objects
