@@ -1,6 +1,6 @@
-# The Object Oriented Abstraction in Elixir
+# The Object Oriented Abstraction in Erlang
 
-That's a bold statement. When you describe Elixir and its ancestor Erlang you use words like functional, concurrent, process oriented, actor based etc. Object Oriented is not in that list at all.
+That's a bold statement. When you describe Erlang you use words like functional, concurrent, process oriented, actor based etc. Object Oriented is not in that list at all.
 
 ## Introduction  
 
@@ -131,7 +131,7 @@ We can see that objects and processes have key characteristics in common. Erlang
 
 Processes don't just isolate state they also isolate execution. When an object sends a message to another the thread of execution passes from the sender to the receiver while the behavior is carried out and then the thread of execution returns to the receiver. When a process sends a message to another process the senders thread of execution continues independently of the receiver. The sender may wait for a response from the receiver, in which case it is blocking, or it may continue asynchronously. Message passing between processes is assumed to be unreliable with no guarantee of delivery.
 
-Collectively what this means is that processes are an Object Oriented system with features that make it safe for concurrency as a first design choice. The Erlang programs and those of its descendants are Concurrent Object Oriented systems.
+Collectively what this means is that processes are an Object Oriented system with features that make it safe for concurrency as a first design choice. Erlang programs and those of its descendants are Concurrent Object Oriented systems.
 
 It used to when I first started making things with Elixir I would turn to processes as an equivalent to objects. This equivalence is wrong for the most part. The difference is in the level of abstraction. Objects are the most fundamental element of Smalltalk programming but in Elixir modules it's functions and data. But when you start to introduce processes to model the behavior of your program then Elixir starts to resemble the message passing objects of an object oriented language.
 
@@ -217,19 +217,19 @@ The syntax is different but overall the semantics are the same: a message is sen
 
 The previous section is a simple low level example but we almost never need to create this behavior ourself in Elixir or Erlang. The `Agent` module is a simple abstraction that allows state to be retrieved and updated.
 
-Agent is a part of OTP, a framework that Erlang is well known for and there are many more abstractions based on processes there too. GenServers are a process that abstracts the server of a client-server relation. Tasks abstract a single purpose process that will typically execute one particular action throughout their lifetime.
+Agents are a part of OTP, the Open Telecom Protocol. OTP is a framework that Erlang is well known for and there are many more abstractions based on processes there too. GenServers are a process that abstracts the server of a client-server relation. Tasks abstract a single purpose process that will typically execute one particular action throughout their lifetime.
 
 So an Erlang application using OTP is likely to have many independent processes communicating by sending messages to each other. Processes are being supervised, killed, restarted, and spawned all the time.
 
-OTP is a high level frame work that models the behavior of a program as message communicating processes. Smalltalk is a pure Object Oriented language. The language is objects all the way down and so too higher level frameworks must also be modeled on the idea of message sending objects.
+OTP is a high level frame work that models the behavior of a program as message communicating processes. Smalltalk is a pure Object Oriented language. Smalltalk is objects all the way down and so too higher level frameworks must also be modeled on the idea of message sending objects.
 
 ### Message Oriented Programming?
 
 Of all the quotes I've sourced from Alan Kay this is my favorite because it really says something important about Object Oriented as a model for system interaction:
 
-_I'm sorry that I long ago coined the term "objects" for this topic because it gets many people to focus on the lesser idea. The big idea is "messaging"..._
+_...Smalltalk is not only NOT its syntax or the class library, it is not even about classes. I'm sorry that I long ago coined the term "objects" for this topic because it gets many people to focus on the lesser idea. The big idea is "messaging"..._[4]
 
-The idea was that the system is all about the messages that need to be sent. It's not about which objects you need. So perhaps it should have been called **Message Oriented Programming**.
+The idea was that the system is all about the messages that need to be sent. It's not about which objects you need or the class hierachies that define them. So perhaps it should have been called **Message Oriented Programming**.
 
 ### Object Oriented is not just a Language Feature
 
@@ -245,7 +245,7 @@ A key thing I found is that the definition of Object Oriented Programming is tha
 
 Message sending objects can be a model for behavior in frameworks, networks, or other systems. Smalltalk-80 and Erlang are a few years apart and OTP would come along much later. If that last quote was anything to go by then we may see new systems implemented as communicating objects or improvements on the idea in the future. We have likely not seen the end of object and message systems and they may have new names for what is already a familiar thing.
 
-This is a fun exploration through history but at the end of the day discussions about what is the one true programming paradigm don't really matter. Mental models for system behavior are just tools. There are commonalities and differences between Smalltalk and Erlang but they were both created to solve the problems of the day. As long as you can effectively solve your problem then the tools you use fade into the background.
+This is a fun exploration through history for me but at the end of the day I don't think discussions about what is the one true programming paradigm really matter. Mental models for system behavior are just tools. There are commonalities and differences between Smalltalk and Erlang but they were both created to solve the problems of the day. They both took the abstraction of message passing as a basis to solve their own particular problems. Solving problems is the goal. The tools you use are up to you.
 
 ## References
 * [1] [Smalltalk-80, viii Preface, Smalltalk has few concepts.](http://stephane.ducasse.free.fr/FreeBooks/BlueBook/Bluebook.pdf)  
