@@ -8,7 +8,7 @@ This article was prompted by a few things. Several years ago I started to learn 
 
 This talk is about a perspective, a point of view I have gained through my experiences, and to share some history that I have had a lot of fun in learning.
 
-About myself: The first language I knew enough to do something with was Java. Eventually I came accross the Smalltalk programming language. I work with Ruby for a living which is heavily inspired by Smalltalk. Smalltalk is the first Object Oriented programming language. I've invested a lot of personal time learning Smalltalk and studying its history to the point where I am now a bit of an Object Oriented purist/snob. I'm new to Elixir and Erlang but not Object Oriented Programming. If I say anything that's just plain wrong or misguided about Elixir or Erlang that is my own ignorance at work.
+About myself: The first language I knew enough to do something with was Java. Eventually I came across the Smalltalk programming language. I work with Ruby for a living which is heavily inspired by Smalltalk. Smalltalk is the first Object Oriented programming language. I've invested a lot of personal time learning Smalltalk and studying its history to the point where I am now a bit of an Object Oriented purist/snob. I'm new to Elixir and Erlang but not Object Oriented Programming. If I say anything that's just plain wrong or misguided about Elixir or Erlang that is my own ignorance at work.
 
 For this article to make sense we first have to have a clear definition of Object Oriented Programming so you can understand where I'm coming from when I describe Erlang. For that we have to go back to the source.
 
@@ -102,7 +102,7 @@ We have the same four objects above but this time they are independent processes
 Joe Armstrong states that COPLs are characterized by the following six properties:[9]
 1. COPLs must support processes. A process can be thought of as a self-contained virtual machine.
 2. Several processes operating on the same machine must be strongly isolated. A fault in one process should not adversely affect another process, unless such interaction is explicitly programmed.
-3. Each process must be identified by a unique unforgeable identifier. We will call this the Pid of the process.
+3. Each process must be identified by a unique unforgettable identifier. We will call this the Pid of the process.
 4. There should be no shared state between processes. Processes interact by sending messages. If you know the Pid of a process then you can send a message to the process.
 5. Message passing is assumed to be unreliable with no guarantee of delivery.
 6. It should be possible for one process to detect failure in another process. We should also know the reason for failure.
@@ -111,7 +111,7 @@ Joe Armstrong states that COPLs are characterized by the following six propertie
 
 _Processes communicate by sending and receiving messages... Message sending is asynchronous and safe, the message is guaranteed to eventually reach the recipient, provided that the recipient exists._[5]
 
-This quote is in opposition with the 5th characteristic of a COPL regarding the guarantees of message recipt, but key features are still there: processes are isolated not only in state an behavior but also in execution. They are asynchronous and communicate with messages.
+This quote is in opposition with the 5th characteristic of a COPL regarding the guarantees of message receipt, but key features are still there: processes are isolated not only in state an behavior but also in execution. They are asynchronous and communicate with messages.
 
 #### Summarizing Concurrency Oriented Programming
 
@@ -119,7 +119,7 @@ A Concurrency Oriented system is all about how processes work. System behavior i
 
 ##### Encapsulation
 
-Processes are strongly isolated. There is no shared state. There is no common execution. A failure in one process will not cascade to other processes (although Erlang can provide this behavior if we want to).
+Processes are strongly isolated. There is no shared state. There is no common execution. A failure in one process will not cascade to other processes.
 
 ##### Message Passing
 
@@ -129,7 +129,7 @@ Processes can interact by sending messages to each other. If you know the PID of
 
 We can see that objects and processes have key characteristics in common. Erlang took the concept further though.
 
-Processes don't just isolate state they also isolate execution. When an object sends a message to another the thread of execution passes from the sender to the receiver while the behavior is carried out and then the thread of execution returns to the receiver. When a process sends a message to another process the senders thread of execution continues independently of the receiver. The sender may wait for a response from the receiver, in which case it is blocking, or it may continue asynchronously. Message passing between processes is assumed to be unreliable with no guarantee of delivery.
+Processes don't just isolate state they also isolate execution. When an object sends a message to another, the thread of execution passes from the sender to the receiver while the behavior is carried out. The thread of execution then returns to the receiver. When a process sends a message to another process the senders thread of execution continues independently of the receiver. The sender may wait for a response from the receiver, in which case it is blocking, or it may continue asynchronously. Message passing between processes is assumed to be unreliable with no guarantee of delivery.
 
 Collectively what this means is that processes are an Object Oriented system with features that make it safe for concurrency as a first design choice. Erlang programs and those of its descendants are Concurrent Object Oriented systems.
 
@@ -174,7 +174,7 @@ This Elixir example is adapted from another example in the Elixir getting starte
 # counter.exs
 defmodule Counter do
   @moduledoc """
-  A simple counter that increases the number each time it receives and increment
+  A simple counter that increases the number each time it receives an `increment`
   message.
   """
 
@@ -211,7 +211,7 @@ iex(5)> flush()
 
 In `iex` you may need to use `flush()` to show what's in the process message queue but you can see at the end that the count increased for each message send.
 
-The syntax is different but overall the semantics are the same: a message is sent to an entity. As long as the entity understands the message then some behavior is triggered. The sender will also pass a reference to `self` so the receiver knows who to return the response to. It an object oriented language this is implicit.
+The syntax is different but overall the semantics are the same: a message is sent to an entity. As long as the entity understands the message then some behavior is triggered. The sender will also pass a reference to `self` so the receiver knows who to return the response to. It most object oriented languages this is implicit.
 
 ### The Object Oriented Abstraction in Erlang
 
@@ -221,7 +221,7 @@ Agents are a part of OTP, the Open Telecom Protocol. OTP is a framework that Erl
 
 So an Erlang application using OTP is likely to have many independent processes communicating by sending messages to each other. Processes are being supervised, killed, restarted, and spawned all the time.
 
-OTP is a high level frame work that models the behavior of a program as message communicating processes. Smalltalk is a pure Object Oriented language. Smalltalk is objects all the way down and so too higher level frameworks must also be modeled on the idea of message sending objects.
+OTP is a high level framework that models the behavior of a program as message communicating processes. Smalltalk is a pure Object Oriented language. Smalltalk is objects all the way down and so too higher level frameworks must also be modeled on the idea of message sending objects.
 
 ### Message Oriented Programming?
 
@@ -229,7 +229,7 @@ Of all the quotes I've sourced from Alan Kay this is my favorite because it real
 
 _...Smalltalk is not only NOT its syntax or the class library, it is not even about classes. I'm sorry that I long ago coined the term "objects" for this topic because it gets many people to focus on the lesser idea. The big idea is "messaging"..._[4]
 
-The idea was that the system is all about the messages that need to be sent. It's not about which objects you need or the class hierachies that define them. So perhaps it should have been called **Message Oriented Programming**.
+The idea was that the system is all about the messages that need to be sent. It's not about which objects you need or the class hierarchies that define them. So perhaps it should have been called **Message Oriented Programming**.
 
 ### Object Oriented is not just a Language Feature
 
