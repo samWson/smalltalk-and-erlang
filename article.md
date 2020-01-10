@@ -111,7 +111,7 @@ Joe Armstrong states that COPLs are characterized by the following six propertie
 
 _Processes communicate by sending and receiving messages... Message sending is asynchronous and safe, the message is guaranteed to eventually reach the recipient, provided that the recipient exists._[5]
 
-This quote is in opposition with the 5th characteristic of a COPL regarding the guarantees of message receipt, but key features are still there: processes are isolated not only in state an behavior but also in execution. They are asynchronous and communicate with messages.
+This quote is in opposition with the 5th characteristic of a COPL regarding the guarantees of message receipt, but key features are still there: processes are isolated not only in state and behavior but also in execution. They are asynchronous and communicate with messages.
 
 #### Summarizing Concurrency Oriented Programming
 
