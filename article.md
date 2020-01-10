@@ -133,7 +133,7 @@ Processes don't just isolate state they also isolate execution. When an object s
 
 Collectively what this means is that processes are an Object Oriented system with features that make it safe for concurrency as a first design choice. Erlang programs and those of its descendants are Concurrent Object Oriented systems.
 
-It used to be when I first started making things with Elixir I would turn to processes as an equivalent to objects. This equivalence is wrong for the most part. The difference is in the level of abstraction. Objects are the most fundamental element of Smalltalk programming but in Elixir modules it's functions and data. But when you start to introduce processes to model the behavior of your program then Elixir starts to resemble the message passing objects of an object oriented language.
+It used to be when I first started making things with Elixir I would turn to processes assuming they were equivalent to objects. This equivalence is wrong for the most part. The difference is in the level of abstraction. Objects are the most fundamental element of Smalltalk programming but in Elixir modules it's functions and data. But when you start to introduce processes to model the behavior of your program then Elixir starts to resemble the message passing objects of an object oriented language.
 
 ### Message Passing Objects and Processes
 
